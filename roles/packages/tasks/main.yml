@@ -1,0 +1,65 @@
+---
+
+
+# If its debian based system use apt package manager for additional software
+- name: Install Packages (Debian Based).
+  become: true
+  apt:
+    name:
+      - thunderbird
+      - mpv
+      - imagemagick
+      - nfs-common
+    state: latest
+  when: ansible_os_family == 'Debian'
+
+- name: Install Packages (Arch).
+  become: true
+  pacman:
+    name:
+      - base-devel
+      - tar
+      - gzip
+      - diffutils
+      - git
+      - curl
+      - thunderbird
+      - mpv
+      - imagemagick
+      - thunderbird
+      - mpv
+      - imagemagick
+      - nfs-utils
+      - bat
+      - btop
+      - exa
+      - fd
+      - ripgrep
+      - rsync
+      - starship
+      - tldr
+      - tree
+      - tmux
+      - unzip
+      - yt-dlp
+      - zk
+      - paperkey
+      - qrencode
+      - zbar
+      - go
+      - go-tools
+    state: latest
+  when: ansible_distribution == 'Archlinux'
+
+- name: Install Brew Packages (Arch).
+  become: false
+  homebrew:
+    name:
+      - terraform
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting
+      - lf
+      - fnm
+      - fzf
+    state: latest
+  when: ansible_distribution == 'Archlinux'

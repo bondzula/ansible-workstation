@@ -1,0 +1,14 @@
+---
+
+- name: Install ZSH
+  become: true
+  pacman:
+    name:
+      - zsh
+  when: ansible_distribution == 'Archlinux'
+
+- name: Set default shell to ZSH
+  user:
+    name: "{{ user }}"
+    shell: /bin/zsh
+  become: true

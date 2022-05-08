@@ -1,0 +1,22 @@
+---
+
+- name: Install Docker
+  become: true
+  pacman:
+    name:
+      - docker
+      - docker-compose
+  when: ansible_distribution == 'Archlinux'
+
+- name: Add {{ user }} to Docker Group
+  user:
+    name: "{{ user }}"
+    groups: docker
+    append: yes
+  become: true
+
+- name: Enable docker service
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: yes

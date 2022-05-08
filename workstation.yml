@@ -1,0 +1,46 @@
+---
+# - hosts: localhost
+#   become: true
+#   pre_tasks:
+#     
+#     - name: update repository index (Pop!_OS)
+#       tags: always
+#       apt:
+#         update_cache: yes
+#       changed_when: false
+#       when: ansible_distribution == "Pop!_OS"
+#
+#     - name: update repository index (Ubuntu)
+#       tags: always
+#       apt:
+#         update_cache: yes
+#       changed_when: false
+#       when: ansible_distribution == "Ubuntu"
+#
+#     - name: update repository index (Fedora)
+#       tags: always
+#       dnf:
+#         update_cache: yes
+#       changed_when: false
+#       when: ansible_distribution == "Fedora"
+#
+#     - name: update repository index (Arch)
+#       tags: always
+#       pacman:
+#         update_cache: yes
+#       changed_when: false
+#       when: ansible_distribution == "Archlinux"
+#
+- hosts: localhost
+  become: true
+  vars:
+    user: bondzula
+  roles:
+    - rust
+    # TODO: Install fnm using cargo, then set default node version
+    # - python
+    # - docker
+    # - git-config
+    # - nerd-fonts
+    # - packages
+    # - neovim

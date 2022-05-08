@@ -1,0 +1,16 @@
+---
+
+- name: Install Python
+  become: true
+  pacman:
+    name:
+      - python
+      - python-pip
+  when: ansible_distribution == 'Archlinux'
+
+- name: Install pip packages
+  pip:
+    name:
+      - yamllint
+      - ansible-lint
+    extra_args: --user

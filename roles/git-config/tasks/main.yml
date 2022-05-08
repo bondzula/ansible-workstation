@@ -1,0 +1,35 @@
+---
+
+- name: Check if git config already exists
+  stat:
+    path: "/home/bondzula/.gitconfig"
+  register: git_config
+
+- name: Setup git configuration
+  when: not git_config.stat.exists
+  become_user: "{{ lookup('env', 'USER') }}"
+  block:
+
+    - name: Set the name
+      community.general.git_config:
+        name: user.name
+        scope: global
+        value: "Stefan Bondzulic"
+
+    - name: Set the email
+      community.general.git_config:
+        name: user.email
+        scope: global
+        value: "18123522+bondzula@users.noreply.github.com"
+
+    - name: Set default editor
+      community.general.git_config:
+        name: core.editor
+        scope: global
+        value: nvim
+
+    - name: Default branch
+      community.general.git_config:
+        name: init.defaultBranch
+        scope: global
+        value: "main"

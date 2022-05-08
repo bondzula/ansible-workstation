@@ -1,0 +1,59 @@
+---
+
+# Create a .font dir in home if it doesn't exist
+- name: Ensure fonts directory exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.fonts"
+    state: directory
+
+# Hack
+- name: Hack exists
+  shell: "ls {{ lookup('env', 'HOME') }}/.fonts/Hack*Nerd*Font*Complete*"
+  register: hack_exists
+  ignore_errors: yes
+
+- name: Download Hack
+  when: hack_exists is failed
+  ansible.builtin.unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip
+    dest: "{{ lookup('env', 'HOME') }}/.fonts/"
+    remote_src: yes
+
+# Fira Code
+- name: Fira Code exists
+  shell: "ls {{ lookup('env', 'HOME') }}/.fonts/Fira*Code*Nerd*Font*Complete*"
+  register: fira_code_exists
+  ignore_errors: yes
+
+- name: Download Fira Code
+  when: fira_code_exists is failed
+  ansible.builtin.unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
+    dest: "{{ lookup('env', 'HOME') }}/.fonts/"
+    remote_src: yes
+
+# Jet Brains Mono
+- name: Jet Brains Mono exists
+  shell: "ls {{ lookup('env', 'HOME') }}/.fonts/JetBrains*Mono*Nerd*Font*Complete*"
+  register: jet_brains_exists
+  ignore_errors: yes
+
+- name: Download Jet Brains Mono
+  when: jet_brains_exists is failed
+  ansible.builtin.unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
+    dest: "{{ lookup('env', 'HOME') }}/.fonts/"
+    remote_src: yes
+
+# Iosevka
+- name: Iosevka exists
+  shell: "ls {{ lookup('env', 'HOME') }}/.fonts/Iosevka*Nerd*Font*Complete*"
+  register: iosevka_exists
+  ignore_errors: yes
+
+- name: Download Iosevka
+  when: iosevka_exists is failed
+  ansible.builtin.unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Iosevka.zip
+    dest: "{{ lookup('env', 'HOME') }}/.fonts/"
+    remote_src: yes
