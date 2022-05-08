@@ -1,0 +1,16 @@
+---
+
+- name: Install Syncthing
+  become: true
+  pacman:
+    name:
+      - syncthing
+  when: ansible_distribution == 'Archlinux'
+
+- name: Enable syncthing systemd service
+  ansible.builtin.service:
+    name: syncthing
+    state: started
+    enabled: yes
+    scope: user
+  when: ansible_distribution == 'Archlinux'
