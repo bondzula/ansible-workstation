@@ -17,6 +17,8 @@
   become: true
   pacman:
     name:
+      - man-db
+      - trash-cli
       - base-devel
       - pacman-contrib
       - tar
@@ -49,6 +51,9 @@
       - zbar
       - go
       - go-tools
+      - kde-gtk-config
+      - xdg-desktop-portal-gtk
+      - flatpak
     state: latest
   when: ansible_distribution == 'Archlinux'
 
@@ -62,5 +67,6 @@
       - lf
       - fnm
       - fzf
+      - gh
     state: latest
   when: ansible_distribution == 'Archlinux'
