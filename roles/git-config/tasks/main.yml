@@ -33,3 +33,9 @@
         name: init.defaultBranch
         scope: global
         value: "main"
+
+    - name: Force GPG signing
+      community.general.git_config:
+        name: commit.gpgsign
+        scope: global
+        value: true
