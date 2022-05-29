@@ -1,0 +1,8 @@
+{
+  "tasks": [
+    {
+      "name": "Run the playbook",
+      "cmd": "ansible-playbook workstation.yml -K"
+    }
+  ]
+}
